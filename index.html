@@ -36,6 +36,8 @@ body.night #clouds{filter:brightness(.45)}
 @keyframes hop{50%{transform:translateY(-6px)}}
 header .cube:hover{animation:hop .4s}
 .btn.sm{padding:8px 11px}
+.jf{display:block;width:100%;height:760px;border:2px solid #1d140d;border-radius:2px;background:#fff}
+.card a{color:#8fd16a}
 .hero .in{position:relative;padding:44px 20px 0}
 .hero h1{font-family:'Press Start 2P',monospace;font-size:clamp(13px,3vw,22px);line-height:1.5;margin:0 0 18px;color:#fff;text-shadow:2px 2px 0 #2c4a63}
 .sign{display:inline-block;background:#5b4326;border:2px solid #2e2213;border-radius:2px;padding:6px 14px;margin-bottom:22px;box-shadow:inset 0 0 0 2px #7d5f38;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:#f4e9c8;user-select:all}
@@ -68,6 +70,28 @@ footer{text-align:center;padding:10px 16px 40px;font-size:12px;color:#a89a80}
 .imprint{display:inline-block;text-align:left;max-width:460px;background:#3a2b1e;border:2px solid #1d140d;box-shadow:inset 0 0 0 2px #5a4228;border-radius:3px;padding:12px 18px;margin-bottom:14px;color:var(--text);font-size:13px}
 .imprint strong{font-family:'Press Start 2P',monospace;font-size:10px;display:block;margin-bottom:6px;color:var(--oak)}
 [hidden]{display:none!important}
+
+/* Satisfying-Optik */
+a.btn{display:inline-block;text-decoration:none}
+.btn,.tab{position:relative;overflow:hidden;transition:transform .08s,filter .12s;box-shadow:inset -2px -2px 0 var(--stone-d),inset 2px 2px 0 var(--stone-l),0 3px 0 #1d1d1d}
+.btn.green{box-shadow:inset -2px -2px 0 var(--grass-d),inset 2px 2px 0 #8fc063,0 3px 0 #1d1d1d}
+.btn.red{box-shadow:inset -2px -2px 0 #6c2c22,inset 2px 2px 0 #d98b7d,0 3px 0 #1d1d1d}
+.tab.active{box-shadow:inset -2px -2px 0 var(--oak-d),inset 2px 2px 0 #dcc38f,0 3px 0 #1d1d1d}
+.btn:hover,.tab:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.btn:active,.tab:active{filter:brightness(.92);transform:translateY(3px)}
+.btn::after,.tab::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);transition:left .45s;pointer-events:none}
+.btn:hover::after,.tab:hover::after{left:130%}
+.view.active{animation:viewin .4s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes viewin{from{opacity:0;transform:translateY(16px) scale(.98)}}
+@keyframes titlein{from{opacity:0;transform:translateY(-26px) scale(.92)}}
+.hero h1{animation:titlein .8s cubic-bezier(.2,.9,.3,1.3) backwards}
+.hero .sign{animation:titlein .8s .15s cubic-bezier(.2,.9,.3,1.3) backwards}
+.hero .btn{animation:titlein .8s .3s cubic-bezier(.2,.9,.3,1.3) backwards}
+@keyframes pulse{0%,100%{outline:2px solid rgba(143,209,106,0);outline-offset:2px}50%{outline:2px solid rgba(143,209,106,.75);outline-offset:6px}}
+#openForm{animation:pulse 1.8s ease-in-out infinite}
+.formbox{position:relative;margin-top:8px;min-height:200px}
+.fb-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);font-size:13px}
+.jf{background:transparent;position:relative}
 </style>
 </head>
 <body>
@@ -98,17 +122,10 @@ footer{text-align:center;padding:10px 16px 40px;font-size:12px;color:#a89a80}
  <section class="view" id="v-anmelden">
   <div class="card">
    <h2>Server-Anmeldung</h2>
-   <ul class="rules"><li>Sei nett zu anderen Spielern.</li><li>Kein Griefing, kein Cheaten.</li></ul>
-   <div id="regState" class="muted"></div>
-   <label for="mcName">Minecraft-Name</label>
-   <input type="text" id="mcName" maxlength="16" autocomplete="off" placeholder="z.B. Steve_123">
-   <label for="edition">Edition</label>
-   <select id="edition"><option>Java</option><option>Bedrock</option></select>
-   <label for="discord">Discord (optional)</label>
-   <input type="text" id="discord" maxlength="40" autocomplete="off" placeholder="dein_name">
-   <div class="check"><input type="checkbox" id="rules"><label for="rules">Ich habe die Regeln gelesen und akzeptiere sie.</label></div>
-   <button class="btn green big" id="regBtn" type="button">Anmelden</button>
-   <div id="regMsg" hidden></div>
+   <p class="muted">Trage deinen Minecraft-Namen ein, wähle Java oder Bedrock und bestätige die Regeln.</p>
+   <a class="btn green big" id="openForm" href="https://form.jotform.com/262823313455051" target="_blank" rel="noopener">Anmeldeformular öffnen</a>
+   <p class="muted" style="margin-top:20px">Oder direkt hier ausfüllen:</p>
+   <div class="formbox"><div class="fb-msg">Formular wird geladen …<br>Wenn nichts erscheint, nutze den Button oben.</div><iframe class="jf" id="jf" title="Server-Anmeldung" data-src="https://form.jotform.com/262823313455051"></iframe></div>
   </div>
  </section>
 
@@ -142,6 +159,7 @@ function go(v){
   if (!views.includes(v)) v = "start";
   views.forEach(x => $("v-" + x).classList.toggle("active", x === v));
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.v === v));
+  if (v === "anmelden") { const f = $("jf"); if (f && !f.getAttribute("src")) f.setAttribute("src", f.dataset.src); }
   window.scrollTo(0, 0);
 }
 document.querySelectorAll(".tab").forEach(t => t.onclick = () => go(t.dataset.v));
@@ -149,27 +167,6 @@ document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.datas
 function say(el, text, ok){ el.hidden = false; el.className = "msg " + (ok ? "ok" : "err"); el.textContent = text; }
 function fmt(ts){ try{ return new Date(ts).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}); }catch(e){ return ""; } }
 
-const DISCORD_INVITE = ""; // <- hier deinen Discord-Einladungslink eintragen
-function showFallback(d){
-  const text = "Anmeldung Minecraft Server 2027 – Name: " + d.name + " | Edition: " + d.edition + (d.discord ? " | Discord: " + d.discord : "");
-  const box = $("regMsg"); box.hidden = false; box.className = "msg ok"; box.textContent = "";
-  const p = document.createElement("p"); p.style.margin = "0 0 10px";
-  p.textContent = "Fast geschafft! Schick diese Nachricht im Discord an Jakob (misterMarlboro97) oder zayneed:";
-  const ta = document.createElement("textarea"); ta.readOnly = true; ta.value = text; ta.style.minHeight = "70px";
-  const row = document.createElement("div"); row.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:10px";
-  const cp = document.createElement("button"); cp.className = "btn"; cp.type = "button"; cp.textContent = "Text kopieren";
-  cp.onclick = async () => { try { await navigator.clipboard.writeText(text); cp.textContent = "Kopiert!"; } catch(e) { ta.select(); cp.textContent = "Markiert – bitte kopieren"; } };
-  row.appendChild(cp);
-  if (DISCORD_INVITE) { const a = document.createElement("a"); a.className = "btn green"; a.href = DISCORD_INVITE; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Zum Discord"; a.style.cssText = "text-decoration:none;display:inline-block"; row.appendChild(a); }
-  box.append(p, ta, row);
-}
-$("regBtn").onclick = async () => {
-  const name = $("mcName").value.trim();
-  if (!/^[A-Za-z0-9_ ]{3,16}$/.test(name)) return say($("regMsg"), "Bitte gib einen gültigen Minecraft-Namen ein (3–16 Zeichen, Buchstaben, Zahlen, _).", false);
-  if (!$("rules").checked) return say($("regMsg"), "Bitte akzeptiere die Regeln.", false);
-  const d = { name, edition: $("edition").value, discord: $("discord").value.trim(), ts: Date.now() };
-  showFallback(d);
-};
 
 
 (function(){
@@ -218,26 +215,71 @@ $("regBtn").onclick = async () => {
  $("dn").onclick=()=>{document.body.classList.toggle("night");$("dn").textContent=document.body.classList.contains("night")?"☀ Tag":"☾ Nacht";draw();};
 })();
 
-// Sounds und Block-Effekte
-let sndOn=true,ac=null;
-function beep(f,d,type,v){
- if(!sndOn)return;
- try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();
-  const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;
-  o.type=type||"square";o.frequency.value=f||520;g.gain.setValueAtTime(v||.04,t);g.gain.exponentialRampToValueAtTime(.0001,t+(d||.07));
-  o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+(d||.07));}catch(e){}
+// Sounds und Effekte
+let sndOn=true,ac=null,master=null,noiseBuf=null,lastHover=0;
+function actx(){
+ if(!sndOn)return null;
+ try{
+  if(!ac){
+   ac=new(window.AudioContext||window.webkitAudioContext)();master=ac.createGain();master.gain.value=.8;
+   const comp=ac.createDynamicsCompressor();master.connect(comp);comp.connect(ac.destination);
+   noiseBuf=ac.createBuffer(1,Math.floor(ac.sampleRate*.4),ac.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  }
+  if(ac.state==="suspended")ac.resume();
+  return ac;
+ }catch(e){return null;}
 }
-$("snd").onclick=()=>{sndOn=!sndOn;$("snd").textContent=sndOn?"Ton: an":"Ton: aus";};
-document.addEventListener("click",e=>{if(e.target.closest(".btn,.tab"))beep(520,.06,"square",.04);});
-document.querySelector(".hero").addEventListener("click",e=>{
- const cols=["#5b8c3a","#8a5a35","#7d4f2e","#8b8b8b","#68a043"];
- for(let i=0;i<10;i++){
-  const d=document.createElement("div");d.className="chip";d.style.left=e.clientX+"px";d.style.top=e.clientY+"px";d.style.background=cols[i%5];
+function tone(f,t,dur,type,vol,to){
+ const a=actx();if(!a)return;const s=a.currentTime+t,o=a.createOscillator(),g=a.createGain();
+ o.type=type||"triangle";o.frequency.setValueAtTime(f,s);if(to)o.frequency.exponentialRampToValueAtTime(to,s+dur);
+ g.gain.setValueAtTime(.0001,s);g.gain.exponentialRampToValueAtTime(vol||.1,s+.008);g.gain.exponentialRampToValueAtTime(.0001,s+dur);
+ o.connect(g);g.connect(master);o.start(s);o.stop(s+dur+.02);
+}
+function noise(t,dur,freq,vol){
+ const a=actx();if(!a)return;const s=a.currentTime+t,src=a.createBufferSource(),fl=a.createBiquadFilter(),g=a.createGain();
+ src.buffer=noiseBuf;fl.type="lowpass";fl.frequency.setValueAtTime(freq,s);fl.frequency.exponentialRampToValueAtTime(Math.max(80,freq/6),s+dur);
+ g.gain.setValueAtTime(vol,s);g.gain.exponentialRampToValueAtTime(.0001,s+dur);
+ src.connect(fl);fl.connect(g);g.connect(master);src.start(s);src.stop(s+dur);
+}
+const SND={
+ click(){tone(520,0,.09,"triangle",.12,300);noise(0,.03,4000,.05);},
+ hover(){tone(1200,0,.025,"sine",.025);},
+ tab(){tone(523,0,.1,"triangle",.1);tone(784,.06,.14,"triangle",.1);},
+ brk(){noise(0,.22,1400,.3);tone(120,0,.16,"sine",.2,50);tone(220+Math.random()*80,.02,.08,"square",.04,90);},
+ day(){[392,494,587,784].forEach((f,i)=>tone(f,i*.07,.18,"triangle",.1));},
+ night(){[784,587,494,330].forEach((f,i)=>tone(f,i*.08,.2,"sine",.12));},
+ ok(){[523,659,784,1047].forEach((f,i)=>tone(f,i*.06,.22,"triangle",.1));}
+};
+const GREEN=["#8fd16a","#5b8c3a","#68a043","#c9f0a8"],STONE=["#c6c6c6","#8b8b8b","#555","#fff"],BLOCK=["#5b8c3a","#8a5a35","#7d4f2e","#8b8b8b","#68a043","#966238"];
+function sparks(x,y,cols,n,power){
+ power=power||1;
+ for(let i=0;i<n;i++){
+  const d=document.createElement("div"),z=Math.round((3+Math.random()*4)*power);
+  d.className="chip";d.style.cssText="left:"+x+"px;top:"+y+"px;width:"+z+"px;height:"+z+"px;background:"+cols[i%cols.length];
   document.body.appendChild(d);
-  const dx=(Math.random()-.5)*160,up=40+Math.random()*60,fall=60+Math.random()*80;
-  d.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate("+dx*.6+"px,"+(-up)+"px)",opacity:1,offset:.4},{transform:"translate("+dx+"px,"+fall+"px)",opacity:0}],{duration:700,easing:"ease-out"}).onfinish=()=>d.remove();
+  const dx=(Math.random()-.5)*130*power,up=25+Math.random()*50*power,fall=40+Math.random()*80,rot=(Math.random()-.5)*360;
+  d.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:"translate("+dx*.6+"px,"+(-up)+"px) rotate("+rot*.5+"deg)",opacity:1,offset:.4},{transform:"translate("+dx+"px,"+fall+"px) rotate("+rot+"deg)",opacity:0}],{duration:600+Math.random()*250,easing:"ease-out"}).onfinish=()=>d.remove();
  }
- beep(140+Math.random()*60,.1,"sawtooth",.05);
+}
+$("snd").onclick=()=>{sndOn=!sndOn;$("snd").textContent=sndOn?"Ton: an":"Ton: aus";if(sndOn)SND.ok();};
+document.addEventListener("click",e=>{
+ const b=e.target.closest(".btn,.tab");if(!b||b.id==="snd"||b.id==="dn")return;
+ if(b.classList.contains("tab"))SND.tab();else if(b.id==="openForm")SND.ok();else SND.click();
+ sparks(e.clientX,e.clientY,b.classList.contains("green")?GREEN:STONE,7);
+});
+document.addEventListener("pointerover",e=>{
+ if(e.pointerType!=="mouse")return;const b=e.target.closest(".btn,.tab");
+ if(!b||b.contains(e.relatedTarget))return;const t=performance.now();
+ if(t-lastHover>60){lastHover=t;SND.hover();}
+});
+$("dn").addEventListener("click",()=>{
+ const night=document.body.classList.contains("night");night?SND.night():SND.day();
+ document.querySelector(".hero").animate([{filter:"brightness(2)"},{filter:"brightness(1)"}],{duration:450});
+});
+document.querySelector(".hero").addEventListener("click",e=>{
+ if(e.target.closest(".btn"))return;
+ sparks(e.clientX,e.clientY,BLOCK,14,2);SND.brk();
+ e.currentTarget.animate([{transform:"translate(0,0)"},{transform:"translate(-3px,2px)"},{transform:"translate(3px,-2px)"},{transform:"translate(0,0)"}],{duration:140});
 });
 </script>
 </body>
