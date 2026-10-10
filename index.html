@@ -281,6 +281,30 @@ body.hw #dayimg{filter:saturate(1.15) contrast(1.05)}
 body.hw #nightimg{filter:hue-rotate(95deg) saturate(1.15)}
 body.hw::before{background:radial-gradient(75vw 65vh at 78% 34%,rgba(255,170,80,.40),rgba(255,140,60,.16) 40%,transparent 75%),linear-gradient(180deg,#2a1a52 0.0%,#3a215e 8.0%,#4a286b 16.0%,#5b2f78 24.0%,#723a75 30.7%,#894270 37.3%,#a24a6a 44.0%,#b4595f 50.0%,#c66750 56.0%,#d9743a 62.0%,#be622e 68.0%,#a45022 74.0%,#8a3f16 80.0%,#683011 86.7%,#48220b 93.3%,#2a1406 100%)}
 html:has(body.hw)::before{background:radial-gradient(60vw 50vh at 20% 12%,rgba(170,90,255,.28),transparent 62%),radial-gradient(70vw 40vh at 50% 105%,rgba(255,110,20,.22),transparent 65%),linear-gradient(180deg,#0a0516 0.0%,#100721 10.0%,#16092d 20.0%,#1d0c3a 30.0%,#260f41 39.3%,#301149 48.7%,#3a1450 58.0%,#34133e 66.0%,#2f112c 74.0%,#2a0e1a 82.0%,#1f0a14 88.0%,#14070e 94.0%,#0a0408 100%)}
+
+/* Konfetti-Hinweis */
+#toast{position:fixed;left:50%;top:78px;transform:translate(-50%,-20px);opacity:0;z-index:90;padding:12px 22px;border-radius:999px;font-weight:700;font-size:15px;color:#fff;background:linear-gradient(180deg,#7c88ff,#4752c4);box-shadow:0 12px 34px rgba(88,101,242,.5);transition:opacity .35s,transform .35s;pointer-events:none;white-space:nowrap;max-width:92vw}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+body.hw #toast{background:linear-gradient(180deg,#ffb35c,#e8650f);color:#2b1000;box-shadow:0 12px 34px rgba(255,120,20,.5)}
+
+/* Handy: kompakte Kopfzeile in einer Reihe */
+@media(max-width:700px){
+ .top{flex-wrap:wrap;gap:6px 8px;padding:8px 14px}
+ body.has-tip .brand{margin-bottom:0}
+ .brand{font-size:0;flex:none;gap:0}
+ .join-tip{font-size:12px}
+ nav{flex:1 1 auto;min-width:0;flex-wrap:nowrap;gap:6px;align-items:center}
+ .btn,.tab{padding:8px 11px;font-size:12px;border-radius:10px}
+ .btn.sm{padding:8px 10px}
+ #hwBtn{font-size:14px;padding:6px 9px}
+ .vol{margin-left:auto;position:relative}
+ .vol-pop{position:absolute;right:0;top:calc(100% + 8px);max-width:none;width:210px;margin-left:0;padding:10px 12px;opacity:1;overflow:visible;display:none;z-index:20;background:linear-gradient(160deg,rgba(24,36,54,.95),rgba(10,16,26,.95));border:1px solid rgba(255,255,255,.14);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+ .vol.open .vol-pop{display:flex;margin-left:0;padding:10px 12px}
+ .vol #snd .lbl{display:none}
+}
+@media(max-width:420px){.lang #langBtn .code{display:none}}
+
+@media(max-width:380px){.top{padding:8px 10px}nav{gap:4px}.btn,.tab{padding:8px 9px}.btn.sm{padding:8px 8px}#hwBtn{padding:6px 7px}}
 </style>
 </head>
 <body class="hw">
@@ -369,8 +393,19 @@ html:has(body.hw)::before{background:radial-gradient(60vw 50vh at 20% 12%,rgba(1
 </footer>
 
 <script>
-const I18N={"de": {"nav_start": "Start", "nav_signup": "Anmelden", "sound": "Ton", "aria_sound": "Ton", "aria_volume": "Lautstärke", "hero_title": "Willkommen auf<br>Minecraft Server 2027!", "hero_cta": "Jetzt anmelden", "signup_title": "Server-Anmeldung", "signup_intro": "Trage deinen Minecraft-Namen ein, wähle Java oder Bedrock und bestätige die Regeln.", "signup_open": "Anmeldeformular öffnen", "signup_or": "Oder direkt hier ausfüllen:", "signup_loading": "Formular wird geladen …<br>Wenn nichts erscheint, nutze den Button oben.", "imp_title": "Impressum / Kontakt", "imp_questions": "Fragen", "imp_questions_text": "Bei Fragen zur Website, zum Server oder zu Discord melde dich bitte bei Jakob.", "skin_hint": "Ziehen: drehen", "skin_title": "Zum Drehen ziehen", "legal": "Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt.", "logo_title": "Zum Discord-Server", "lang_label": "Sprache", "join_discord": "Hier dem Discord joinen", "dm_btn": "Per Discord schreiben", "dcard_title": "Mein Discord-Profil", "dcard_role": "Discord-Server-Admin", "dcard_open": "Profil öffnen"}, "en": {"nav_start": "Home", "nav_signup": "Sign up", "sound": "Sound", "aria_sound": "Sound", "aria_volume": "Volume", "hero_title": "Welcome to<br>Minecraft Server 2027!", "hero_cta": "Sign up now", "signup_title": "Server sign-up", "signup_intro": "Enter your Minecraft name, choose Java or Bedrock and confirm the rules.", "signup_open": "Open sign-up form", "signup_or": "Or fill it out right here:", "signup_loading": "Loading form …<br>If nothing appears, use the button above.", "imp_title": "Imprint / Contact", "imp_questions": "Questions", "imp_questions_text": "If you have questions about the website, the server or Discord, please contact Jakob.", "skin_hint": "Drag to rotate", "skin_title": "Drag to rotate", "legal": "Not an official Minecraft product. Not approved by Mojang or Microsoft.", "logo_title": "Go to the Discord server", "lang_label": "Language", "join_discord": "Join the Discord here", "dm_btn": "Message me on Discord", "dcard_title": "My Discord profile", "dcard_role": "Discord server admin", "dcard_open": "Open profile"}, "es": {"nav_start": "Inicio", "nav_signup": "Registrarse", "sound": "Sonido", "aria_sound": "Sonido", "aria_volume": "Volumen", "hero_title": "¡Bienvenido a<br>Minecraft Server 2027!", "hero_cta": "Regístrate ahora", "signup_title": "Registro en el servidor", "signup_intro": "Escribe tu nombre de Minecraft, elige Java o Bedrock y confirma las reglas.", "signup_open": "Abrir formulario de registro", "signup_or": "O rellénalo directamente aquí:", "signup_loading": "Cargando formulario …<br>Si no aparece nada, usa el botón de arriba.", "imp_title": "Aviso legal / Contacto", "imp_questions": "Preguntas", "imp_questions_text": "Si tienes preguntas sobre la web, el servidor o Discord, ponte en contacto con Jakob.", "skin_hint": "Arrastra para girar", "skin_title": "Arrastra para girar", "legal": "Producto no oficial de Minecraft. No aprobado por Mojang ni Microsoft.", "logo_title": "Ir al servidor de Discord", "lang_label": "Idioma", "join_discord": "Únete al Discord aquí", "dm_btn": "Escríbeme por Discord", "dcard_title": "Mi perfil de Discord", "dcard_role": "Admin del servidor de Discord", "dcard_open": "Abrir perfil"}};
-I18N.zh={"nav_start": "首页", "nav_signup": "报名", "sound": "声音", "aria_sound": "声音", "aria_volume": "音量", "hero_title": "欢迎来到<br>Minecraft Server 2027!", "hero_cta": "立即报名", "signup_title": "服务器报名", "signup_intro": "请输入你的 Minecraft 用户名，选择 Java 版或基岩版，并确认规则。", "signup_open": "打开报名表单", "signup_or": "或者直接在这里填写：", "signup_loading": "表单加载中……<br>如果没有显示，请使用上方的按钮。", "imp_title": "法律声明 / 联系方式", "imp_questions": "问题", "imp_questions_text": "如对网站、服务器或 Discord 有任何疑问，请联系 Jakob。", "skin_hint": "拖动旋转", "skin_title": "拖动旋转", "legal": "非官方 Minecraft 产品，未获得 Mojang 或 Microsoft 的认可。", "logo_title": "前往 Discord 服务器", "lang_label": "语言", "join_discord": "点击这里加入 Discord", "dm_btn": "在 Discord 上私信我", "dcard_title": "我的 Discord 资料", "dcard_role": "Discord 服务器管理员", "dcard_open": "打开资料"};
+(function(){
+ var q=new URLSearchParams(location.search).get("angemeldet");
+ if(q&&window.self!==window.top){
+  try{window.parent.postMessage("mc-signup-done","*");}catch(e){}
+  window.stop();
+  document.documentElement.innerHTML='<body style="margin:0;display:grid;place-items:center;height:100vh;background:#0f1722;color:#9ff0b8;font:700 40px system-ui,sans-serif">✔</body>';
+ }
+})();
+
+</script>
+<script>
+const I18N={"de": {"nav_start": "Start", "nav_signup": "Anmelden", "sound": "Ton", "aria_sound": "Ton", "aria_volume": "Lautstärke", "hero_title": "Willkommen auf<br>Minecraft Server 2027!", "hero_cta": "Jetzt anmelden", "signup_title": "Server-Anmeldung", "signup_intro": "Trage deinen Minecraft-Namen ein, wähle Java oder Bedrock und bestätige die Regeln.", "signup_open": "Anmeldeformular öffnen", "signup_or": "Oder direkt hier ausfüllen:", "signup_loading": "Formular wird geladen …<br>Wenn nichts erscheint, nutze den Button oben.", "imp_title": "Impressum / Kontakt", "imp_questions": "Fragen", "imp_questions_text": "Bei Fragen zur Website, zum Server oder zu Discord melde dich bitte bei Jakob.", "skin_hint": "Ziehen: drehen", "skin_title": "Zum Drehen ziehen", "legal": "Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt.", "logo_title": "Zum Discord-Server", "lang_label": "Sprache", "join_discord": "Hier dem Discord joinen", "dm_btn": "Per Discord schreiben", "dcard_title": "Mein Discord-Profil", "dcard_role": "Discord-Server-Admin", "dcard_open": "Profil öffnen", "signup_thanks": "Danke für deine Anmeldung! 🎉"}, "en": {"nav_start": "Home", "nav_signup": "Sign up", "sound": "Sound", "aria_sound": "Sound", "aria_volume": "Volume", "hero_title": "Welcome to<br>Minecraft Server 2027!", "hero_cta": "Sign up now", "signup_title": "Server sign-up", "signup_intro": "Enter your Minecraft name, choose Java or Bedrock and confirm the rules.", "signup_open": "Open sign-up form", "signup_or": "Or fill it out right here:", "signup_loading": "Loading form …<br>If nothing appears, use the button above.", "imp_title": "Imprint / Contact", "imp_questions": "Questions", "imp_questions_text": "If you have questions about the website, the server or Discord, please contact Jakob.", "skin_hint": "Drag to rotate", "skin_title": "Drag to rotate", "legal": "Not an official Minecraft product. Not approved by Mojang or Microsoft.", "logo_title": "Go to the Discord server", "lang_label": "Language", "join_discord": "Join the Discord here", "dm_btn": "Message me on Discord", "dcard_title": "My Discord profile", "dcard_role": "Discord server admin", "dcard_open": "Open profile", "signup_thanks": "Thanks for signing up! 🎉"}, "es": {"nav_start": "Inicio", "nav_signup": "Registro", "sound": "Sonido", "aria_sound": "Sonido", "aria_volume": "Volumen", "hero_title": "¡Bienvenido a<br>Minecraft Server 2027!", "hero_cta": "Regístrate ahora", "signup_title": "Registro en el servidor", "signup_intro": "Escribe tu nombre de Minecraft, elige Java o Bedrock y confirma las reglas.", "signup_open": "Abrir formulario de registro", "signup_or": "O rellénalo directamente aquí:", "signup_loading": "Cargando formulario …<br>Si no aparece nada, usa el botón de arriba.", "imp_title": "Aviso legal / Contacto", "imp_questions": "Preguntas", "imp_questions_text": "Si tienes preguntas sobre la web, el servidor o Discord, ponte en contacto con Jakob.", "skin_hint": "Arrastra para girar", "skin_title": "Arrastra para girar", "legal": "Producto no oficial de Minecraft. No aprobado por Mojang ni Microsoft.", "logo_title": "Ir al servidor de Discord", "lang_label": "Idioma", "join_discord": "Únete al Discord aquí", "dm_btn": "Escríbeme por Discord", "dcard_title": "Mi perfil de Discord", "dcard_role": "Admin del servidor de Discord", "dcard_open": "Abrir perfil", "signup_thanks": "¡Gracias por registrarte! 🎉"}};
+I18N.zh={"nav_start": "首页", "nav_signup": "报名", "sound": "声音", "aria_sound": "声音", "aria_volume": "音量", "hero_title": "欢迎来到<br>Minecraft Server 2027!", "hero_cta": "立即报名", "signup_title": "服务器报名", "signup_intro": "请输入你的 Minecraft 用户名，选择 Java 版或基岩版，并确认规则。", "signup_open": "打开报名表单", "signup_or": "或者直接在这里填写：", "signup_loading": "表单加载中……<br>如果没有显示，请使用上方的按钮。", "imp_title": "法律声明 / 联系方式", "imp_questions": "问题", "imp_questions_text": "如对网站、服务器或 Discord 有任何疑问，请联系 Jakob。", "skin_hint": "拖动旋转", "skin_title": "拖动旋转", "legal": "非官方 Minecraft 产品，未获得 Mojang 或 Microsoft 的认可。", "logo_title": "前往 Discord 服务器", "lang_label": "语言", "join_discord": "点击这里加入 Discord", "dm_btn": "在 Discord 上私信我", "dcard_title": "我的 Discord 资料", "dcard_role": "Discord 服务器管理员", "dcard_open": "打开资料", "signup_thanks": "感谢报名！🎉"};
 let LANG="de";
 function T(k){return (I18N[LANG]&&I18N[LANG][k])||I18N.de[k]||k;}
 const SERVER_IP = "mc.mein-server.de"; // <- hier deine Server-Adresse eintragen
@@ -477,6 +512,21 @@ function noise(t,dur,freq,vol){
 }
 const j=()=>(.94+Math.random()*.12)*PITCH;
 const SND={
+ join(){
+  const n=(t,f,d)=>{tone(f,t,d,"sine",.14,f*1.06);tone(f*2,t,d*.8,"triangle",.03,f*2.1);};
+  n(0,523,.1);n(.09,784,.16);
+ },
+ horn(){
+  const toot=(t0,f0,f1,d)=>{
+   const a=actx();if(!a)return;const st=a.currentTime+t0,o=a.createOscillator(),g=a.createGain(),fl=a.createBiquadFilter(),lf=a.createOscillator(),lg=a.createGain();
+   o.type="sawtooth";o.frequency.setValueAtTime(f0,st);o.frequency.linearRampToValueAtTime(f1,st+d*.4);
+   fl.type="lowpass";fl.frequency.value=1200;
+   lf.frequency.value=24;lg.gain.value=.012;lf.connect(lg);lg.connect(g.gain);
+   g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(.045,st+.03);g.gain.setValueAtTime(.045,st+d-.08);g.gain.exponentialRampToValueAtTime(.0001,st+d);
+   o.connect(fl);fl.connect(g);g.connect(master);o.start(st);lf.start(st);o.stop(st+d+.02);lf.stop(st+d+.02);
+  };
+  noise(0,.1,2600,.08);toot(.02,262,330,.28);toot(.34,392,494,.22);
+ },
  vol(v){tone(180+v*360,0,.05,"square",.06,null,900);},
  click(){const k=j();tone(190*k,0,.045,"square",.05,110*k,800);noise(0,.02,1200,.06);},
  hover(){tone(140,0,.02,"square",.006,null,500);},
@@ -493,7 +543,7 @@ function sparks(){}
 const vs=$("vslider"),vv=$("vval"),sb=$("snd"),volEl=$("vol");let lastTick=0;
 function applyVol(){
  sndOn=VOL>0;if(master)master.gain.value=.8*VOL;
- sb.textContent=(VOL===0?"🔇":VOL<.4?"🔈":VOL<.75?"🔉":"🔊")+" "+T("sound");
+ sb.innerHTML=(VOL===0?"🔇":VOL<.4?"🔈":VOL<.75?"🔉":"🔊")+' <span class="lbl">'+T("sound")+'</span>';
  vs.value=Math.round(VOL*100);vs.style.setProperty("--p",vs.value+"%");vv.textContent=vs.value+"%";
 }
 sb.onclick=()=>{
@@ -508,7 +558,7 @@ vs.addEventListener("input",()=>{
 vs.addEventListener("change",()=>{if(VOL>0)SND.ok();});
 applyVol();
 document.addEventListener("click",e=>{
- const t=e.target;if(t.closest("#skinStage")||t.closest(".vol")||t.closest(".lang-menu"))return;
+ const t=e.target;if(t.closest("#skinStage")||t.closest(".vol")||t.closest(".lang-menu")||t.closest("#logoLink"))return;
  const now=performance.now();combo=now-lastClick<650?Math.min(combo+1,8):0;lastClick=now;PITCH=1+combo*.05;
  const b=t.closest(".btn,.tab"),x=e.clientX,y=e.clientY;
  if(b){
@@ -603,7 +653,7 @@ function applyLang(){
  document.querySelectorAll("[data-i18n-html]").forEach(e=>{e.innerHTML=T(e.dataset.i18nHtml);});
  document.querySelectorAll("[data-i18n-attr]").forEach(e=>{e.dataset.i18nAttr.split(";").forEach(p=>{const a=p.split(":");e.setAttribute(a[0],T(a[1]));});});
  applyVol();
- $("langBtn").textContent="🌐 "+LANG.toUpperCase();
+ $("langBtn").innerHTML='🌐 <span class="code">'+LANG.toUpperCase()+'</span>';
  document.querySelectorAll(".lang-opt").forEach(b=>b.classList.toggle("on",b.dataset.lang===LANG));
 }
 (function(){
@@ -660,6 +710,51 @@ function applyLang(){
  document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync();});
  sync();
 })();
+
+// Konfetti und leises Tröten nach der Anmeldung
+function celebrate(){
+ SND.horn();
+ const old=document.getElementById("toast");if(old)old.remove();
+ const tt=document.createElement("div");tt.id="toast";tt.textContent=T("signup_thanks");document.body.appendChild(tt);
+ requestAnimationFrame(()=>tt.classList.add("show"));
+ setTimeout(()=>{tt.classList.remove("show");setTimeout(()=>tt.remove(),500);},5000);
+ if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const cv=document.createElement("canvas");cv.style.cssText="position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:80";
+ document.body.appendChild(cv);
+ const dpr=window.devicePixelRatio||1,W=innerWidth,H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;
+ const c=cv.getContext("2d");c.scale(dpr,dpr);
+ const cols=["#ff5a5f","#ffb400","#4ade80","#38bdf8","#a78bfa","#f472b6","#ffffff","#8fd16a"];
+ const P=[];
+ const add=(x,y,vx,vy)=>P.push({x:x,y:y,vx:vx,vy:vy,w:6+Math.random()*7,h:4+Math.random()*6,r:Math.random()*6.28,vr:(Math.random()-.5)*10,c:cols[Math.floor(Math.random()*cols.length)],ph:Math.random()*6.28});
+ for(let i=0;i<70;i++){const a=-Math.PI/2+(Math.random()-.5)*.9,sp=500+Math.random()*600;add(0,H,Math.cos(a)*sp*.7+120,Math.sin(a)*sp);}
+ for(let i=0;i<70;i++){const a=-Math.PI/2+(Math.random()-.5)*.9,sp=500+Math.random()*600;add(W,H,Math.cos(a)*sp*.7-120,Math.sin(a)*sp);}
+ for(let i=0;i<90;i++)add(Math.random()*W,-20-Math.random()*H*.6,(Math.random()-.5)*80,60+Math.random()*120);
+ let last=performance.now(),t0=last;
+ (function loop(t){
+  const dt=Math.min(.033,(t-last)/1000);last=t;
+  c.clearRect(0,0,W,H);
+  P.forEach(p=>{
+   p.vy+=900*dt;p.vx*=1-1.1*dt;p.vy*=1-.9*dt;p.ph+=dt*6;
+   p.x+=(p.vx+Math.sin(p.ph)*40)*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;
+   c.save();c.translate(p.x,p.y);c.rotate(p.r);c.globalAlpha=Math.max(0,Math.min(1,(4.6-(t-t0)/1000)));
+   c.fillStyle=p.c;c.fillRect(-p.w/2,-p.h/2,p.w,p.h);c.restore();
+  });
+  if(t-t0<4600)requestAnimationFrame(loop);else cv.remove();
+ })(t0);
+}
+window.addEventListener("message",e=>{
+ const jf=document.getElementById("jf");
+ if(e.data==="mc-signup-done"&&jf&&e.source===jf.contentWindow)celebrate();
+});
+(function(){
+ if(new URLSearchParams(location.search).get("angemeldet")){
+  try{history.replaceState(null,"",location.pathname);}catch(e){}
+  setTimeout(celebrate,700);
+ }
+})();
+
+// Join-Sound beim Klick auf das Discord-Logo
+$("logoLink").addEventListener("click",()=>{SND.join();});
 </script>
 </body>
 </html>
