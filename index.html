@@ -291,7 +291,6 @@ html:has(body.hw)::before{background:radial-gradient(60vw 50vh at 20% 12%,rgba(1
   <nav>
    <button class="tab active" data-v="start" type="button" data-i18n="nav_start">Start</button>
    <button class="tab" data-v="anmelden" type="button" data-i18n="nav_signup">Anmelden</button>
-   <button class="btn sm" id="dn" type="button">☾ Nacht</button>
    <div class="vol" id="vol">
     <button class="btn sm" id="snd" type="button" data-i18n-attr="aria-label:aria_sound">🔉 Ton</button>
     <div class="vol-pop"><input type="range" id="vslider" min="0" max="100" step="5" value="60" data-i18n-attr="aria-label:aria_volume"><span id="vval">60%</span></div>
@@ -370,11 +369,10 @@ html:has(body.hw)::before{background:radial-gradient(60vw 50vh at 20% 12%,rgba(1
 </footer>
 
 <script>
-const I18N={"de": {"nav_start": "Start", "nav_signup": "Anmelden", "day_to_night": "☾ Nacht", "night_to_day": "☀ Tag", "sound": "Ton", "aria_sound": "Ton", "aria_volume": "Lautstärke", "hero_title": "Willkommen auf<br>Minecraft Server 2027!", "hero_cta": "Jetzt anmelden", "signup_title": "Server-Anmeldung", "signup_intro": "Trage deinen Minecraft-Namen ein, wähle Java oder Bedrock und bestätige die Regeln.", "signup_open": "Anmeldeformular öffnen", "signup_or": "Oder direkt hier ausfüllen:", "signup_loading": "Formular wird geladen …<br>Wenn nichts erscheint, nutze den Button oben.", "imp_title": "Impressum / Kontakt", "imp_questions": "Fragen", "imp_questions_text": "Bei Fragen zur Website, zum Server oder zu Discord melde dich bitte bei Jakob.", "skin_hint": "Ziehen: drehen", "skin_title": "Zum Drehen ziehen", "legal": "Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt.", "logo_title": "Zum Discord-Server", "lang_label": "Sprache", "join_discord": "Hier dem Discord joinen", "dm_btn": "Per Discord schreiben", "dcard_title": "Mein Discord-Profil", "dcard_role": "Discord-Server-Admin", "dcard_open": "Profil öffnen"}, "en": {"nav_start": "Home", "nav_signup": "Sign up", "day_to_night": "☾ Night", "night_to_day": "☀ Day", "sound": "Sound", "aria_sound": "Sound", "aria_volume": "Volume", "hero_title": "Welcome to<br>Minecraft Server 2027!", "hero_cta": "Sign up now", "signup_title": "Server sign-up", "signup_intro": "Enter your Minecraft name, choose Java or Bedrock and confirm the rules.", "signup_open": "Open sign-up form", "signup_or": "Or fill it out right here:", "signup_loading": "Loading form …<br>If nothing appears, use the button above.", "imp_title": "Imprint / Contact", "imp_questions": "Questions", "imp_questions_text": "If you have questions about the website, the server or Discord, please contact Jakob.", "skin_hint": "Drag to rotate", "skin_title": "Drag to rotate", "legal": "Not an official Minecraft product. Not approved by Mojang or Microsoft.", "logo_title": "Go to the Discord server", "lang_label": "Language", "join_discord": "Join the Discord here", "dm_btn": "Message me on Discord", "dcard_title": "My Discord profile", "dcard_role": "Discord server admin", "dcard_open": "Open profile"}, "es": {"nav_start": "Inicio", "nav_signup": "Registrarse", "day_to_night": "☾ Noche", "night_to_day": "☀ Día", "sound": "Sonido", "aria_sound": "Sonido", "aria_volume": "Volumen", "hero_title": "¡Bienvenido a<br>Minecraft Server 2027!", "hero_cta": "Regístrate ahora", "signup_title": "Registro en el servidor", "signup_intro": "Escribe tu nombre de Minecraft, elige Java o Bedrock y confirma las reglas.", "signup_open": "Abrir formulario de registro", "signup_or": "O rellénalo directamente aquí:", "signup_loading": "Cargando formulario …<br>Si no aparece nada, usa el botón de arriba.", "imp_title": "Aviso legal / Contacto", "imp_questions": "Preguntas", "imp_questions_text": "Si tienes preguntas sobre la web, el servidor o Discord, ponte en contacto con Jakob.", "skin_hint": "Arrastra para girar", "skin_title": "Arrastra para girar", "legal": "Producto no oficial de Minecraft. No aprobado por Mojang ni Microsoft.", "logo_title": "Ir al servidor de Discord", "lang_label": "Idioma", "join_discord": "Únete al Discord aquí", "dm_btn": "Escríbeme por Discord", "dcard_title": "Mi perfil de Discord", "dcard_role": "Admin del servidor de Discord", "dcard_open": "Abrir perfil"}};
-I18N.zh={"nav_start": "首页", "nav_signup": "报名", "day_to_night": "☾ 夜晚", "night_to_day": "☀ 白天", "sound": "声音", "aria_sound": "声音", "aria_volume": "音量", "hero_title": "欢迎来到<br>Minecraft Server 2027!", "hero_cta": "立即报名", "signup_title": "服务器报名", "signup_intro": "请输入你的 Minecraft 用户名，选择 Java 版或基岩版，并确认规则。", "signup_open": "打开报名表单", "signup_or": "或者直接在这里填写：", "signup_loading": "表单加载中……<br>如果没有显示，请使用上方的按钮。", "imp_title": "法律声明 / 联系方式", "imp_questions": "问题", "imp_questions_text": "如对网站、服务器或 Discord 有任何疑问，请联系 Jakob。", "skin_hint": "拖动旋转", "skin_title": "拖动旋转", "legal": "非官方 Minecraft 产品，未获得 Mojang 或 Microsoft 的认可。", "logo_title": "前往 Discord 服务器", "lang_label": "语言", "join_discord": "点击这里加入 Discord", "dm_btn": "在 Discord 上私信我", "dcard_title": "我的 Discord 资料", "dcard_role": "Discord 服务器管理员", "dcard_open": "打开资料"};
+const I18N={"de": {"nav_start": "Start", "nav_signup": "Anmelden", "sound": "Ton", "aria_sound": "Ton", "aria_volume": "Lautstärke", "hero_title": "Willkommen auf<br>Minecraft Server 2027!", "hero_cta": "Jetzt anmelden", "signup_title": "Server-Anmeldung", "signup_intro": "Trage deinen Minecraft-Namen ein, wähle Java oder Bedrock und bestätige die Regeln.", "signup_open": "Anmeldeformular öffnen", "signup_or": "Oder direkt hier ausfüllen:", "signup_loading": "Formular wird geladen …<br>Wenn nichts erscheint, nutze den Button oben.", "imp_title": "Impressum / Kontakt", "imp_questions": "Fragen", "imp_questions_text": "Bei Fragen zur Website, zum Server oder zu Discord melde dich bitte bei Jakob.", "skin_hint": "Ziehen: drehen", "skin_title": "Zum Drehen ziehen", "legal": "Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt.", "logo_title": "Zum Discord-Server", "lang_label": "Sprache", "join_discord": "Hier dem Discord joinen", "dm_btn": "Per Discord schreiben", "dcard_title": "Mein Discord-Profil", "dcard_role": "Discord-Server-Admin", "dcard_open": "Profil öffnen"}, "en": {"nav_start": "Home", "nav_signup": "Sign up", "sound": "Sound", "aria_sound": "Sound", "aria_volume": "Volume", "hero_title": "Welcome to<br>Minecraft Server 2027!", "hero_cta": "Sign up now", "signup_title": "Server sign-up", "signup_intro": "Enter your Minecraft name, choose Java or Bedrock and confirm the rules.", "signup_open": "Open sign-up form", "signup_or": "Or fill it out right here:", "signup_loading": "Loading form …<br>If nothing appears, use the button above.", "imp_title": "Imprint / Contact", "imp_questions": "Questions", "imp_questions_text": "If you have questions about the website, the server or Discord, please contact Jakob.", "skin_hint": "Drag to rotate", "skin_title": "Drag to rotate", "legal": "Not an official Minecraft product. Not approved by Mojang or Microsoft.", "logo_title": "Go to the Discord server", "lang_label": "Language", "join_discord": "Join the Discord here", "dm_btn": "Message me on Discord", "dcard_title": "My Discord profile", "dcard_role": "Discord server admin", "dcard_open": "Open profile"}, "es": {"nav_start": "Inicio", "nav_signup": "Registrarse", "sound": "Sonido", "aria_sound": "Sonido", "aria_volume": "Volumen", "hero_title": "¡Bienvenido a<br>Minecraft Server 2027!", "hero_cta": "Regístrate ahora", "signup_title": "Registro en el servidor", "signup_intro": "Escribe tu nombre de Minecraft, elige Java o Bedrock y confirma las reglas.", "signup_open": "Abrir formulario de registro", "signup_or": "O rellénalo directamente aquí:", "signup_loading": "Cargando formulario …<br>Si no aparece nada, usa el botón de arriba.", "imp_title": "Aviso legal / Contacto", "imp_questions": "Preguntas", "imp_questions_text": "Si tienes preguntas sobre la web, el servidor o Discord, ponte en contacto con Jakob.", "skin_hint": "Arrastra para girar", "skin_title": "Arrastra para girar", "legal": "Producto no oficial de Minecraft. No aprobado por Mojang ni Microsoft.", "logo_title": "Ir al servidor de Discord", "lang_label": "Idioma", "join_discord": "Únete al Discord aquí", "dm_btn": "Escríbeme por Discord", "dcard_title": "Mi perfil de Discord", "dcard_role": "Admin del servidor de Discord", "dcard_open": "Abrir perfil"}};
+I18N.zh={"nav_start": "首页", "nav_signup": "报名", "sound": "声音", "aria_sound": "声音", "aria_volume": "音量", "hero_title": "欢迎来到<br>Minecraft Server 2027!", "hero_cta": "立即报名", "signup_title": "服务器报名", "signup_intro": "请输入你的 Minecraft 用户名，选择 Java 版或基岩版，并确认规则。", "signup_open": "打开报名表单", "signup_or": "或者直接在这里填写：", "signup_loading": "表单加载中……<br>如果没有显示，请使用上方的按钮。", "imp_title": "法律声明 / 联系方式", "imp_questions": "问题", "imp_questions_text": "如对网站、服务器或 Discord 有任何疑问，请联系 Jakob。", "skin_hint": "拖动旋转", "skin_title": "拖动旋转", "legal": "非官方 Minecraft 产品，未获得 Mojang 或 Microsoft 的认可。", "logo_title": "前往 Discord 服务器", "lang_label": "语言", "join_discord": "点击这里加入 Discord", "dm_btn": "在 Discord 上私信我", "dcard_title": "我的 Discord 资料", "dcard_role": "Discord 服务器管理员", "dcard_open": "打开资料"};
 let LANG="de";
 function T(k){return (I18N[LANG]&&I18N[LANG][k])||I18N.de[k]||k;}
-function updDn(){const b=document.getElementById("dn");if(b)b.textContent=document.body.classList.contains("night")?T("night_to_day"):T("day_to_night");}
 const SERVER_IP = "mc.mein-server.de"; // <- hier deine Server-Adresse eintragen
 const $ = id => document.getElementById(id);
 $("ip").textContent = SERVER_IP;
@@ -446,8 +444,7 @@ function fmt(ts){ try{ return new Date(ts).toLocaleDateString("de-DE",{day:"2-di
  }
  if(window.ResizeObserver)new ResizeObserver(draw).observe(hero);else window.addEventListener("resize",draw);
  draw();
- $("dn").onclick=()=>{document.body.classList.toggle("night");updDn();draw();};
-})();
+ })();
 
 // Sounds und Effekte
 let sndOn=true,ac=null,master=null,noiseBuf=null,lastHover=0,PITCH=1,combo=0,lastClick=0,VOL=.6,prevVol=.6;
@@ -516,7 +513,6 @@ document.addEventListener("click",e=>{
  const b=t.closest(".btn,.tab"),x=e.clientX,y=e.clientY;
  if(b){
   if(b.classList.contains("tab")){SND.tab();sparks(x,y,PLANK,10+combo,1);}
-  else if(b.id==="dn"){sparks(x,y,STONE,8,1);}
   else if(b.id==="openForm"||b.classList.contains("green")){SND.ok();sparks(x,y,GREEN,12+combo,1.1);}
   else{SND.click();sparks(x,y,STONE,10+combo,1);}
  }else if(t.closest(".hero")){
@@ -529,10 +525,6 @@ document.addEventListener("pointerover",e=>{
  if(e.pointerType!=="mouse")return;const b=e.target.closest(".btn,.tab");
  if(!b||b.contains(e.relatedTarget))return;const t=performance.now();
  if(t-lastHover>60){lastHover=t;SND.hover();}
-});
-$("dn").addEventListener("click",()=>{
- const night=document.body.classList.contains("night");night?SND.night():SND.day();
- document.querySelector(".hero").animate([{filter:"brightness(2)"},{filter:"brightness(1)"}],{duration:450});
 });
 
 // 3D-Skin zum Drehen
@@ -610,7 +602,7 @@ function applyLang(){
  document.querySelectorAll("[data-i18n]").forEach(e=>{e.textContent=T(e.dataset.i18n);});
  document.querySelectorAll("[data-i18n-html]").forEach(e=>{e.innerHTML=T(e.dataset.i18nHtml);});
  document.querySelectorAll("[data-i18n-attr]").forEach(e=>{e.dataset.i18nAttr.split(";").forEach(p=>{const a=p.split(":");e.setAttribute(a[0],T(a[1]));});});
- updDn();applyVol();
+ applyVol();
  $("langBtn").textContent="🌐 "+LANG.toUpperCase();
  document.querySelectorAll(".lang-opt").forEach(b=>b.classList.toggle("on",b.dataset.lang===LANG));
 }
@@ -650,6 +642,23 @@ function applyLang(){
  const set=v=>{on=v;document.body.classList.toggle("hw",v);$("hwBtn").setAttribute("aria-pressed",String(v));try{localStorage.setItem("hw",v?"1":"0");}catch(e){}};
  $("hwBtn").onclick=()=>{set(!on);if(on)SND.night();};
  set(on);
+})();
+
+
+// Tag und Nacht wechseln automatisch nach der Uhrzeit (Nacht: 19 bis 7 Uhr)
+(function(){
+ const q=new URLSearchParams(location.search).get("modus"); // nur zum Testen: ?modus=nacht oder ?modus=tag
+ function nightNow(){if(q==="nacht")return true;if(q==="tag")return false;const h=new Date().getHours();return h<7||h>=19;}
+ function sync(){
+  const n=nightNow();
+  if(document.body.classList.contains("night")!==n){
+   document.body.classList.toggle("night",n);
+   document.querySelector(".hero").animate([{filter:"brightness(1.6)"},{filter:"brightness(1)"}],{duration:450});
+  }
+ }
+ setInterval(sync,60000);
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync();});
+ sync();
 })();
 </script>
 </body>
