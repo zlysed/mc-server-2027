@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minecraft Server 2027</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--grass:#5b8c3a;--grass-d:#3f6a26;--dirt:#8a5a35;--dirt-d:#5a3a22;--stone:#8b8b8b;--stone-d:#555;--stone-l:#c6c6c6;--oak:#b8935a;--oak-d:#7d5a2c;--paper:#f2e8cc;--ink:#3a2a1a;--text:#f1ebdd;--muted:#c9bda5}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.55;background-color:#2b2119}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:#3a2b1e;border-bottom:2px solid #1d140d;box-shadow:0 2px 0 var(--grass-d)}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:10px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Press Start 2P',monospace;font-size:10px;margin:0}
+.cube{width:20px;height:20px;image-rendering:pixelated;flex:none}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+.btn,.tab{font:600 12px/1 Inter,system-ui,sans-serif;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.6);cursor:pointer;background:var(--stone);border:1px solid #1d1d1d;border-radius:2px;padding:8px 13px;
+box-shadow:inset -2px -2px 0 var(--stone-d),inset 2px 2px 0 var(--stone-l);transition:filter .12s,transform .12s}
+.btn:hover,.tab:hover{filter:brightness(1.12)}
+.btn:active,.tab:active{transform:translateY(1px)}
+.tab.active{background:var(--oak);box-shadow:inset -2px -2px 0 var(--oak-d),inset 2px 2px 0 #dcc38f;color:#2b1d0d;text-shadow:none}
+.btn.green{background:var(--grass);box-shadow:inset -2px -2px 0 var(--grass-d),inset 2px 2px 0 #8fc063}
+.btn.red{background:#a64a3a;box-shadow:inset -2px -2px 0 #6c2c22,inset 2px 2px 0 #d98b7d}
+.btn.big{font-size:13px;padding:11px 20px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.view{display:none;padding:26px 0 48px}.view.active{display:block}
+.hero{position:relative;overflow:hidden;border:2px solid #1d140d;border-radius:3px;min-height:380px;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,.35)}
+.hero canvas{position:absolute;image-rendering:pixelated}
+#scene{left:0;top:0}
+#clouds{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+body.night #clouds{filter:brightness(.45)}
+@keyframes drift{to{transform:translateX(1300px)}}
+.chip{position:fixed;width:8px;height:8px;pointer-events:none;z-index:50}
+@keyframes hop{50%{transform:translateY(-6px)}}
+header .cube:hover{animation:hop .4s}
+.btn.sm{padding:8px 11px}
+.hero .in{position:relative;padding:44px 20px 0}
+.hero h1{font-family:'Press Start 2P',monospace;font-size:clamp(13px,3vw,22px);line-height:1.5;margin:0 0 18px;color:#fff;text-shadow:2px 2px 0 #2c4a63}
+.sign{display:inline-block;background:#5b4326;border:2px solid #2e2213;border-radius:2px;padding:6px 14px;margin-bottom:22px;box-shadow:inset 0 0 0 2px #7d5f38;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;color:#f4e9c8;user-select:all}
+h2{font-family:'Press Start 2P',monospace;font-size:12px;margin:0 0 16px;text-shadow:2px 2px 0 #000}
+.board{border:8px solid var(--oak);border-radius:3px;background:#2f353b;box-shadow:inset 0 0 0 2px #1d140d,inset 0 0 30px rgba(0,0,0,.6),0 0 0 2px #1d140d,0 4px 0 rgba(0,0,0,.35);padding:18px;min-height:260px;
+background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:100% 4px}
+.notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px 16px}
+.note{position:relative;background:var(--paper);color:var(--ink);border-radius:2px;padding:20px 14px 12px;box-shadow:0 3px 0 rgba(0,0,0,.35);transform:rotate(-1deg)}
+.note:nth-child(even){transform:rotate(1.2deg);background:#ecdcb4}
+.note::before{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:2px;background:#c0392b;border:1px solid #7a1f15;box-shadow:inset -2px -2px 0 #8f2a1f}
+.note h3{margin:0 0 2px;font-size:14px}
+.note small{color:#7a6446;font-size:12px}
+.note p{margin:10px 0 0;white-space:pre-wrap;word-break:break-word}
+.note .btn{margin-top:12px}
+.card{background:#3a2b1e;border:2px solid #1d140d;border-radius:3px;box-shadow:inset 0 0 0 2px #5a4228,0 4px 0 rgba(0,0,0,.35);padding:20px;max-width:560px;margin:0 auto}
+.card.wide{max-width:none}
+label{display:block;margin:16px 0 6px;font-size:13px;font-weight:600;color:var(--muted)}
+input[type=text],textarea,select{width:100%;font:inherit;color:#fff;background:#1d1812;border:1px solid #6b6b6b;border-radius:2px;padding:9px 11px;outline:none}
+input:focus,textarea:focus,select:focus{border-color:#fff}
+textarea{min-height:120px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;margin:18px 0}
+.check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--grass)}
+.check label{margin:0;color:var(--text);font-weight:400}
+.msg{margin-top:16px;padding:12px;border-radius:2px;border:1px solid;font-size:13px}
+.msg.ok{background:#27401a;border-color:var(--grass)}.msg.err{background:#4a1f1a;border-color:#a64a3a}
+.muted{color:var(--muted);font-size:14px}
+.rules{padding-left:20px;color:var(--muted);margin:0 0 6px}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #1d140d;padding:8px 0;font-size:14px;word-break:break-word}
+footer{text-align:center;padding:10px 16px 40px;font-size:12px;color:#a89a80}
+.imprint{display:inline-block;text-align:left;max-width:460px;background:#3a2b1e;border:2px solid #1d140d;box-shadow:inset 0 0 0 2px #5a4228;border-radius:3px;padding:12px 18px;margin-bottom:14px;color:var(--text);font-size:13px}
+.imprint strong{font-family:'Press Start 2P',monospace;font-size:10px;display:block;margin-bottom:6px;color:var(--oak)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap top">
+  <h1 class="brand"><canvas class="cube" id="cube" width="16" height="16"></canvas>MINECRAFT SERVER 2027</h1>
+  <nav>
+   <button class="tab active" data-v="start" type="button">Start</button>
+   <button class="tab" data-v="anmelden" type="button">Anmelden</button>
+   <button class="btn sm" id="dn" type="button">☾ Nacht</button>
+   <button class="btn sm" id="snd" type="button">Ton: an</button>
+  </nav>
+ </div>
+</header>
+
+<main class="wrap">
+ <section class="view active" id="v-start">
+  <div class="hero">
+   <canvas id="scene"></canvas><div id="clouds"></div>
+   <div class="in">
+    <h1>Willkommen auf<br>Minecraft Server 2027!</h1>
+    <div class="sign" id="ip"></div><br>
+    <button class="btn green big" data-go="anmelden" type="button">Jetzt anmelden</button>
+   </div>
+  </div>
+ </section>
+
+ <section class="view" id="v-anmelden">
+  <div class="card">
+   <h2>Server-Anmeldung</h2>
+   <ul class="rules"><li>Sei nett zu anderen Spielern.</li><li>Kein Griefing, kein Cheaten.</li></ul>
+   <div id="regState" class="muted"></div>
+   <label for="mcName">Minecraft-Name</label>
+   <input type="text" id="mcName" maxlength="16" autocomplete="off" placeholder="z.B. Steve_123">
+   <label for="edition">Edition</label>
+   <select id="edition"><option>Java</option><option>Bedrock</option></select>
+   <label for="discord">Discord (optional)</label>
+   <input type="text" id="discord" maxlength="40" autocomplete="off" placeholder="dein_name">
+   <div class="check"><input type="checkbox" id="rules"><label for="rules">Ich habe die Regeln gelesen und akzeptiere sie.</label></div>
+   <button class="btn green big" id="regBtn" type="button">Anmelden</button>
+   <div id="regMsg" hidden></div>
+  </div>
+ </section>
+
+</main>
+<footer>
+ <div class="imprint"><strong>Impressum / Kontakt</strong>Discord: misterMarlboro97 / Jakob<br>Bei Fragen zur Website, zum Server oder zu Discord melde dich bitte bei Jakob (misterMarlboro97) oder bei zayneed.</div>
+ <div>Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt.</div>
+</footer>
+
+<script>
+const SERVER_IP = "mc.dein-server.de"; // <- hier deine Server-Adresse eintragen
+const $ = id => document.getElementById(id);
+$("ip").textContent = SERVER_IP;
+(function(){
+ let seed=11; const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+ const pick=a=>a[Math.floor(rnd()*a.length)];
+ const R=(c,x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h);};
+ const tile=document.createElement("canvas");tile.width=tile.height=16;const tc=tile.getContext("2d");
+ for(let y=0;y<16;y++)for(let x=0;x<16;x++)R(tc,x,y,1,1,pick(["#2e231a","#33271d","#2a2018","#382b20"]));
+ document.body.style.backgroundImage="url("+tile.toDataURL()+")";
+ document.body.style.backgroundSize="32px 32px";
+ document.body.style.imageRendering="pixelated";
+ const cube=$("cube").getContext("2d");
+ for(let y=0;y<16;y++)for(let x=0;x<16;x++){
+  let col=(y<5||(y<7&&rnd()<.5))?pick(["#5b8c3a","#68a043","#4f7e32"]):pick(["#8a5a35","#966238","#7d4f2e"]);
+  if(x==0||y==0||x==15||y==15)col="#1d140d";
+  R(cube,x,y,1,1,col);}
+})();
+const views = ["start","anmelden"];
+function go(v){
+  if (!views.includes(v)) v = "start";
+  views.forEach(x => $("v-" + x).classList.toggle("active", x === v));
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.v === v));
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => go(t.dataset.v));
+document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+function say(el, text, ok){ el.hidden = false; el.className = "msg " + (ok ? "ok" : "err"); el.textContent = text; }
+function fmt(ts){ try{ return new Date(ts).toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}); }catch(e){ return ""; } }
+
+const DISCORD_INVITE = ""; // <- hier deinen Discord-Einladungslink eintragen
+function showFallback(d){
+  const text = "Anmeldung Minecraft Server 2027 – Name: " + d.name + " | Edition: " + d.edition + (d.discord ? " | Discord: " + d.discord : "");
+  const box = $("regMsg"); box.hidden = false; box.className = "msg ok"; box.textContent = "";
+  const p = document.createElement("p"); p.style.margin = "0 0 10px";
+  p.textContent = "Fast geschafft! Schick diese Nachricht im Discord an Jakob (misterMarlboro97) oder zayneed:";
+  const ta = document.createElement("textarea"); ta.readOnly = true; ta.value = text; ta.style.minHeight = "70px";
+  const row = document.createElement("div"); row.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;margin-top:10px";
+  const cp = document.createElement("button"); cp.className = "btn"; cp.type = "button"; cp.textContent = "Text kopieren";
+  cp.onclick = async () => { try { await navigator.clipboard.writeText(text); cp.textContent = "Kopiert!"; } catch(e) { ta.select(); cp.textContent = "Markiert – bitte kopieren"; } };
+  row.appendChild(cp);
+  if (DISCORD_INVITE) { const a = document.createElement("a"); a.className = "btn green"; a.href = DISCORD_INVITE; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Zum Discord"; a.style.cssText = "text-decoration:none;display:inline-block"; row.appendChild(a); }
+  box.append(p, ta, row);
+}
+$("regBtn").onclick = async () => {
+  const name = $("mcName").value.trim();
+  if (!/^[A-Za-z0-9_ ]{3,16}$/.test(name)) return say($("regMsg"), "Bitte gib einen gültigen Minecraft-Namen ein (3–16 Zeichen, Buchstaben, Zahlen, _).", false);
+  if (!$("rules").checked) return say($("regMsg"), "Bitte akzeptiere die Regeln.", false);
+  const d = { name, edition: $("edition").value, discord: $("discord").value.trim(), ts: Date.now() };
+  showFallback(d);
+};
+
+
+(function(){
+ const hash=(x,y,s)=>{let h=(Math.imul(x|0,374761393)+Math.imul(y|0,668265263)+Math.imul(s|0,1442695041))|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967296;};
+ const pk=(a,x,y,s)=>a[Math.floor(hash(x,y,s)*a.length)];
+ const hero=document.querySelector(".hero"),cv=$("scene"),cl=$("clouds");
+ let ps=2;
+ function draw(){
+  if(!hero.clientWidth)return;
+  const dpr=window.devicePixelRatio||1,n=Math.max(1,Math.round(2*dpr));ps=n/dpr;
+  const W=Math.ceil(hero.clientWidth/ps),H=Math.ceil(hero.clientHeight/ps);
+  cv.width=W;cv.height=H;cv.style.width=W*ps+"px";cv.style.height=H*ps+"px";
+  const c=cv.getContext("2d"),night=document.body.classList.contains("night");
+  const T=h=>{if(!night)return h;const v=parseInt(h.slice(1),16);return"rgb("+Math.round((v>>16&255)*.33)+","+Math.round((v>>8&255)*.4)+","+Math.round((v&255)*.62)+")";};
+  const R=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h);};
+  const B=8,GY=H-Math.round(H*.24);
+  for(let y=0;y<H;y++){const k=Math.min(1,y/GY);R(0,y,W,1,night?"rgb("+Math.round(10+k*30)+","+Math.round(16+k*34)+","+Math.round(48+k*52)+")":"rgb("+Math.round(88+k*110)+","+Math.round(160+k*68)+","+Math.round(228+k*18)+")");}
+  if(night){
+   for(let gx=0;gx<W;gx+=12)for(let gy=0;gy<GY*.6;gy+=12)if(hash(gx,gy,5)<.3){const z=hash(gx,gy,8)<.2?2:1;R(gx+Math.floor(hash(gx,gy,6)*10),gy+Math.floor(hash(gx,gy,7)*10),z,z,"#fff");}
+   R(W-62,16,14,14,"#e6ebf5");R(W-58,20,3,3,"#c3cadb");R(W-53,25,2,2,"#c3cadb");
+  } else {R(W-62,16,14,14,"#fff3a0");R(W-60,18,10,10,"#fffbd0");}
+  for(let x=0;x<W;x++){const h=Math.round(GY-H*.17+6*Math.sin(x/26)+3*Math.sin(x/9+2));R(x,h,1,GY-h,T("#74a35a"));}
+  for(let x=0;x<W;x++){const h=Math.round(GY-H*.08+4*Math.sin(x/19+1)+2*Math.sin(x/7));R(x,h,1,GY-h,T("#4c7a35"));}
+  const leaf=(ox,oy)=>{for(let j=0;j<B;j++)for(let i=0;i<B;i++){const X=ox+i,Y=oy+j;R(X,Y,1,1,T(hash(X,Y,1)<.14?"#2a5a18":pk(["#3f7a26","#4a8a2c","#356b20","#3f7a26"],X,Y,2)));}};
+  const log=(ox,oy)=>{for(let j=0;j<B;j++)for(let i=0;i<B;i++){const X=ox+i;R(X,oy+j,1,1,T(i===0||hash(X,0,3)<.15?"#4a3219":pk(["#6b4a2a","#5d3f22","#7a5530"],X,0,4)));}};
+  const tree=cx=>{const ox=cx*B;
+   for(let r=0;r<4;r++)log(ox,GY-(r+1)*B);
+   const wd={2:5,3:5,4:3,5:1};
+   for(const r in wd){const w=wd[r],row=+r;for(let k=-(w-1)/2;k<=(w-1)/2;k++){if(k===0&&row<=3)continue;leaf(ox+k*B,GY-(row+1)*B);}}};
+  tree(Math.round(W*.1/B));tree(Math.round(W*.9/B));
+  for(let x=0;x<W;x++){const g=3+Math.floor(hash(x>>1,0,3)*3);for(let y=GY;y<H;y++){
+   let col;
+   if(y===GY)col="#7fb356";
+   else if(y<GY+g)col=pk(["#5b8c3a","#68a043","#4f7e32"],x,y,4);
+   else if(y>GY+B&&hash(Math.floor(x/B),Math.floor((y-GY)/B),9)<.07)col=pk(["#8b8b8b","#7a7a7a","#9a9a9a"],x,y,10);
+   else col=hash(x,y,11)<.08?"#5a3a22":pk(["#8a5a35","#966238","#7d4f2e","#6f4627"],x,y,5);
+   R(x,y,1,1,T(col));}}
+  if(!cl.firstChild)[[34,6,90,0],[26,26,120,40],[30,50,75,70],[22,14,105,20]].forEach(([w,top,dur,delay])=>{
+   const k=document.createElement("canvas");k.width=w;k.height=9;const q=k.getContext("2d");
+   q.fillStyle="#fff";q.fillRect(0,4,w,4);q.fillRect(5,0,w-12,4);q.fillStyle="#dfe8f0";q.fillRect(0,7,w,1);
+   k.style.cssText="left:-220px;top:"+top+"px;width:"+w*ps+"px;height:9px;height:"+9*ps+"px;animation:drift "+dur+"s linear -"+delay+"s infinite";
+   cl.appendChild(k);});
+ }
+ if(window.ResizeObserver)new ResizeObserver(draw).observe(hero);else window.addEventListener("resize",draw);
+ draw();
+ $("dn").onclick=()=>{document.body.classList.toggle("night");$("dn").textContent=document.body.classList.contains("night")?"☀ Tag":"☾ Nacht";draw();};
+})();
+
+// Sounds und Block-Effekte
+let sndOn=true,ac=null;
+function beep(f,d,type,v){
+ if(!sndOn)return;
+ try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();
+  const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;
+  o.type=type||"square";o.frequency.value=f||520;g.gain.setValueAtTime(v||.04,t);g.gain.exponentialRampToValueAtTime(.0001,t+(d||.07));
+  o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+(d||.07));}catch(e){}
+}
+$("snd").onclick=()=>{sndOn=!sndOn;$("snd").textContent=sndOn?"Ton: an":"Ton: aus";};
+document.addEventListener("click",e=>{if(e.target.closest(".btn,.tab"))beep(520,.06,"square",.04);});
+document.querySelector(".hero").addEventListener("click",e=>{
+ const cols=["#5b8c3a","#8a5a35","#7d4f2e","#8b8b8b","#68a043"];
+ for(let i=0;i<10;i++){
+  const d=document.createElement("div");d.className="chip";d.style.left=e.clientX+"px";d.style.top=e.clientY+"px";d.style.background=cols[i%5];
+  document.body.appendChild(d);
+  const dx=(Math.random()-.5)*160,up=40+Math.random()*60,fall=60+Math.random()*80;
+  d.animate([{transform:"translate(0,0)",opacity:1},{transform:"translate("+dx*.6+"px,"+(-up)+"px)",opacity:1,offset:.4},{transform:"translate("+dx+"px,"+fall+"px)",opacity:0}],{duration:700,easing:"ease-out"}).onfinish=()=>d.remove();
+ }
+ beep(140+Math.random()*60,.1,"sawtooth",.05);
+});
+</script>
+</body>
+</html>
